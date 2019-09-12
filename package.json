@@ -7,9 +7,10 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start-data": "node ./database/seed.js",
-    "start-server": "nodemon node ./server/index.js",
+    "seed": "node ./database/seed.js",
+    "dev": "nodemon ./server/index.js",
     "dev-react": "webpack -d --watch",
+    "build": "webpack -p",
     "test": "jest --coverage --u",
     "test-server": "mocha --exit",
     "start": "node ./server/index.js"

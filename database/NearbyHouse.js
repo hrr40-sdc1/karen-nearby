@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const db = require('./index.js');
-const Schema = mongoose.Schema;
+require('./index.js');
 
-var nearbySchema = new Schema({
+const { Schema } = mongoose;
+
+const nearbySchema = new Schema({
   parentHouseId: Number,
   nearbyNum: Number,
   imgUrl: String,
@@ -15,7 +16,4 @@ var nearbySchema = new Schema({
   arrIndex: Number,
 });
 
-var NearbyHouse = mongoose.model('NearbyHouse', nearbySchema);
-
-
-module.exports = NearbyHouse;
+module.exports = mongoose.model('NearbyHouse', nearbySchema);

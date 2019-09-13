@@ -6,6 +6,11 @@ npm
 npm-debug.log
 node_modules/
 public/nearby.bundle.js
+scripts/images/
+database/data.json
+.vscode/
+scripts/uploads3.sh
+
 
 
 pids

@@ -51,12 +51,31 @@ npm install
 - HTTP Verbs
 
 ### Get
-  - /house/:houseId
-### Post
-
-- /house/:houseId
+  - /house/:parentHouseId/:nearbyNum
 ```
- { parentHouseId: 1,
+[
+    {
+        "_id": "5d7af74ca85e72d73c7be036",
+        "parentHouseId": 90,
+        "nearbyNum": 24,
+        "imgUrl": "https://housemania.s3-us-west-1.amazonaws.com/camylla-battani-l8Y9fVgxrEE-unsplash.jpg",
+        "location": "Leonieshire",
+        "type": "deleniti",
+        "title": "natus excepturi maiores magnam",
+        "cost": "$261/night",
+        "stars": 3,
+        "reviewCount": 73,
+        "arrIndex": 11,
+        "__v": 0
+    }
+]
+```
+
+### Post
+- /house/
+```
+ {
+  parentHouseId: 1,
   nearbyNum: 1,
   imgUrl: 'http:house.jpg',
   location: 'close',
@@ -68,9 +87,24 @@ npm install
   arrIndex: 1, }
 
 ```
+
 ### Delete
+- /house/:parentHouseId/:nearbyNum
+{
+    "_id": "5d798bb1e2cae68d2935923d",
+    "parentHouseId": 100,
+    "nearbyNum": 40,
+    "imgUrl": "https://housemania.s3-us-west-1.amazonaws.com/timothy-buck-psrloDbaZc8-unsplash.jpg",
+    "location": "O'Connelltown",
+    "type": "dolores",
+    "title": "quia laudantium ut inventore",
+    "cost": "$84/night",
+    "stars": 4,
+    "reviewCount": 285,
+    "arrIndex": 0,
+    "__v": 0
+}
 
-- /house/:houseId
 ### Put
+- /house/:parentHouseId/:nearbyNum
 
-- /house/:houseId

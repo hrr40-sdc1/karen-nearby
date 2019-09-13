@@ -24,7 +24,7 @@ const generateUsers = (count) => {
     'https://housemania.s3-us-west-1.amazonaws.com/spencer-_-HHWwqWV6d5k-unsplash.jpg',
     'https://housemania.s3-us-west-1.amazonaws.com/sweet-ice-cream-photography-lFpqHAmeLZg-unsplash.jpg',
     'https://housemania.s3-us-west-1.amazonaws.com/timothy-buck-psrloDbaZc8-unsplash.jpg',
-    'https://housemania.s3-us-west-1.amazonaws.com/travel-cents-WYLuNY5JG4E-unsplash.jpg'
+    'https://housemania.s3-us-west-1.amazonaws.com/travel-cents-WYLuNY5JG4E-unsplash.jpg',
   ];
 
   for (let id = 1; id <= count; id + 1) {

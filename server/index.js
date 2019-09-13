@@ -29,8 +29,8 @@ app.get('/house/:houseId', (req, res) => {
 });
 
 app.delete('/house/:houseId', (req, res) => {
-  const { houseId } = req.params;
-  NearbyHouse.findOneAndDelete({ parentHouseId: houseId })
+  const { houseId, nearbyNum } = req.params;
+  NearbyHouse.findOneAndDelete({ parentHouseId: houseId, nearbyNum })
     .then((house) => {
       res.send(house);
     })
@@ -39,10 +39,9 @@ app.delete('/house/:houseId', (req, res) => {
     });
 });
 app.put('/house/:houseId', (req, res) => {
-  const { houseId } = req.params;
-  const { body } = req;
-  console.log('body', body, houseId);
-  NearbyHouse.findOne({ parentHouseId: houseId })
+  const { houseId, nearbyNum } = req.params;
+  console.log('body', req, houseId);
+  NearbyHouse.findOne({ parentHouseId: houseId, nearbyNum })
     .then((house) => {
       res.send(house);
     })

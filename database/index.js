@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const mongoose = require('mongoose');
 
 const mongoDBUrl = 'mongodb://localhost/nearbyPlaces'; // change local host to mongo instance

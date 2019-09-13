@@ -52,8 +52,9 @@ npm install
 
 ### Get
   - /house/:houseId
-### Post
 
+
+### Post
 - /house/:houseId
 ```
  { parentHouseId: 1,
@@ -68,9 +69,11 @@ npm install
   arrIndex: 1, }
 
 ```
+
 ### Delete
-
 - /house/:houseId
+
+
 ### Put
-
 - /house/:houseId
+

@@ -42,13 +42,6 @@ app.get('/house/:parentHouseId/:nearbyNum', (req, res) => {
 app.delete('/house/:parentHouseId/:nearbyNum', (req, res) => {
   const { parentHouseId, nearbyNum } = req.params;
   console.log('delete ', parentHouseId, nearbyNum);
-  NearbyHouse.find({ parentHouseId, nearbyNum })
-  .then((houses) => {
-    console.log('house', houses);
-  })
-  .catch((error) => {
-    res.send(error);
-  });
 
   NearbyHouse.findOneAndDelete({ parentHouseId, nearbyNum })
     .then((house) => {

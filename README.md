@@ -1,20 +1,19 @@
-# Project Name
+# HRR40 SDC - Housemania
 
-> Project description
+> Software Development Capstone
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
+  - https://github.com/hrr40-sdc1/dj12589-description
+  - https://github.com/hrr40-sdc1/atjandra_description
+  - https://github.com/hrr40-sdc1/reviews
+  -
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-1. [API](#api)
+2. [Requirements](#requirements)
+3. [Development](#development)
+4. [API](#api)
 
 ## Usage
 
@@ -90,6 +89,7 @@ npm install
 
 ### Delete
 - /house/:parentHouseId/:nearbyNum
+```
 {
     "_id": "5d798bb1e2cae68d2935923d",
     "parentHouseId": 100,
@@ -104,6 +104,8 @@ npm install
     "arrIndex": 0,
     "__v": 0
 }
+```
+
 
 ### Put
 - /house/:parentHouseId/:nearbyNum

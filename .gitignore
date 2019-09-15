@@ -13,6 +13,16 @@ scripts/uploads3.sh
 
 
 
+## assorted extra files
+public/nearby.bundle.js
+scripts/images/
+database/data.json
+.vscode/
+scripts/uploads3.sh
+database/postgresinstall.md
+
+
+
 pids
 *.pid
 logs

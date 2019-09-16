@@ -9,6 +9,7 @@ const cityFaker = (count) => {
     cities.push({
       city,
       countryCode,
+      count,
     });
   }
   return cities;

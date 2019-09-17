@@ -3,7 +3,7 @@ const faker = require('faker');
 
 const listingFaker = (start, end) => {
   const listings = [];
-  for (let listingId = start; listingId <= end; listingId += 1) {
+  for (let listingId = start; listingId < end; listingId += 1) {
     const cityId = faker.random.number({
       min: 0,
       max: 100,
@@ -27,8 +27,8 @@ const listingFaker = (start, end) => {
       max: 1000,
     });
     listings.push({
-      listingName,
       listingId,
+      listingName,
       photoId,
       cityId,
       cost,

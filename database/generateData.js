@@ -5,6 +5,7 @@ const { Parser } = require('json2csv');
 const getCities = require('./cityfaker.js');
 const getPhotos = require('./imagefaker.js');
 const getListings = require('./listingfaker.js');
+const header = { header:false };
 
 getCities(100000)
   .then((fullList) => {
@@ -15,7 +16,7 @@ getCities(100000)
   })
   .then((cities) => {
     try {
-      const parser = new Parser();
+      const parser = new Parser({header:false});
       const csv = parser.parse(cities);
       fs.writeFileSync('cities.csv', csv);
     } catch (err) {
@@ -33,7 +34,7 @@ getCities(100000)
       })
       .then((photos) => {
         try {
-          const parser = new Parser();
+          const parser = new Parser({header:false});
           const csv = parser.parse(photos);
           fs.writeFileSync('photos.csv', csv)
         } catch (err) {
@@ -47,7 +48,7 @@ getCities(100000)
 getListings(8000001, 10000000)
   .then((listings) => {
     try {
-      const parser = new Parser();
+      const parser = new Parser({header:false});
       const csv = parser.parse(listings);
       fs.writeFileSync('listings-part5.csv', csv);
     } catch (err) {

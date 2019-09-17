@@ -3,13 +3,13 @@ const faker = require('faker');
 
 const cityFaker = (count) => {
   const cities = [];
-  for (let i = 1; i <= count; i += 1) {
-    const city = faker.address.city();
+  for (let id = 1; id <= count; id += 1) {
+    const cityName = faker.address.city();
     const countryCode = faker.address.country();
     cities.push({
-      city,
+      cityName,
       countryCode,
-      count,
+      City: 'City',
     });
   }
   return cities;

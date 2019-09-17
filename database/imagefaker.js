@@ -13,5 +13,5 @@ const readdir = (url) => {
     });
 };
 
-const getImages = () => new Promise((resolve, reject) => resolve(readdir(location)));
-module.exports = getImages;
+const getPhotos = () => new Promise((resolve, reject) => resolve(readdir(location)));
+module.exports = getPhotos;

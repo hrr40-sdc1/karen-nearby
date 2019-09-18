@@ -14,5 +14,19 @@ const cityFaker = (count) => {
   }
   return cities;
 };
-const getCities = (count) => new Promise((resolve, reject) => resolve(cityFaker(count)));
+
+const uniqueCitiesList = (count) => {
+  const cityList = cityFaker(count);
+  return cityList.filter((element, index, array) => array.findIndex((nodes) => nodes.cityName === element.cityName) === index).map((item, cityId) => {
+    const { cityName, countryCode, City } = item;
+    return {
+      cityId,
+      cityName,
+      countryCode,
+      City,
+    };
+  });
+};
+
+const getCities = (count) => new Promise((resolve, reject) => resolve(uniqueCitiesList(count)));
 module.exports = getCities;

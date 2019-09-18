@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 const faker = require('faker');
 
-const listingFaker = (start, end, ids) => {
-  console.log(ids.length);
+const listingFaker = (start, end, count) => {
   const listings = [];
   for (let listingId = start; listingId < end; listingId += 1) {
-    const cityId = faker.random.arrayElement(ids);
+    const cityId = faker.random.number({
+      min: 0,
+      max: parseInt(count, 10),
+    });
     const type = faker.random.arrayElement(['Entire place', 'Private Room', 'Shared Room']);
     const listingName = faker.lorem.words(2);
     const cost = faker.random.number({

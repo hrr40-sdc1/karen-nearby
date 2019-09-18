@@ -1,21 +1,58 @@
 /* eslint-disable no-console */
 const fs = require('fs');
-const getCities = require('./cityfaker.js');
 const { Parser } = require('json2csv');
 
-const fields = ['city', 'countryCode'];
-const opts = { fields };
+const getCities = require('./cityfaker.js');
+const getPhotos = require('./imagefaker.js');
+const getListings = require('./listingfaker.js');
+const header = { header:false };
 
 getCities(100000)
-  .then((fullList) => fullList.filter((element, index, array) => array.findIndex((nodes) => nodes.city === element.city) === index))
-  .then((city) => {
+  .then((fullList) => {
+    return fullList.filter((element, index, array) => array.findIndex((nodes) => nodes.cityName === element.cityName) === index).map((item, cityId) => {
+      const { cityName, countryCode, City } = item;
+      return { cityId, cityName, countryCode, City };
+    });
+  })
+  .then((cities) => {
     try {
-      const parser = new Parser(opts);
-      const csv = parser.parse(city);
-      //console.log(csv);
-      fs.writeFileSync('city.csv', csv)
+      const parser = new Parser({header:false});
+      const csv = parser.parse(cities);
+      fs.writeFileSync('cities.csv', csv);
     } catch (err) {
       console.error(err);
     }
   })
-  .catch((error) => console.log('error', error))
+  .then(() => {
+    getPhotos()
+      .then((filenames) => filenames)
+      .then((results) => {
+        return results.map((item, photoId) => {
+          let url = `https://hrr40-sdc1.s3-us-west-2.amazonaws.com/images/${item}`;
+          return { photoId, url, Photo: 'Photo' };
+        });
+      })
+      .then((photos) => {
+        try {
+          const parser = new Parser({header:false});
+          const csv = parser.parse(photos);
+          fs.writeFileSync('photos.csv', csv)
+        } catch (err) {
+          console.error(err.message);
+        }
+      })
+      .catch((error) => console.log('error', error.message))
+  })
+  .catch((error) => console.log('error', error.message));
+
+getListings(8000001, 10000000)
+  .then((listings) => {
+    try {
+      const parser = new Parser({header:false});
+      const csv = parser.parse(listings);
+      fs.writeFileSync('listings-part5.csv', csv);
+    } catch (err) {
+      console.error(err.message);
+    }
+  })
+  .catch((error) => console.log('error', error.message));

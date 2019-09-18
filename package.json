@@ -13,7 +13,8 @@
     "build": "webpack -p",
     "test": "jest --coverage --u",
     "test-server": "mocha --exit",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "faker": "node ./database/generateData.js"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",

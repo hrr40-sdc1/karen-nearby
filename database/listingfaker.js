@@ -1,13 +1,11 @@
 /* eslint-disable no-console */
 const faker = require('faker');
 
-const listingFaker = (start, end) => {
+const listingFaker = (start, end, ids) => {
+  console.log(ids.length);
   const listings = [];
   for (let listingId = start; listingId < end; listingId += 1) {
-    const cityId = faker.random.number({
-      min: 0,
-      max: 100,
-    });
+    const cityId = faker.random.arrayElement(ids);
     const type = faker.random.arrayElement(['Entire place', 'Private Room', 'Shared Room']);
     const listingName = faker.lorem.words(2);
     const cost = faker.random.number({
@@ -35,11 +33,11 @@ const listingFaker = (start, end) => {
       stars,
       reviews,
       type,
-      Listing: 'Listing'
+      Listing: 'Listing',
     });
   }
   return listings;
 };
 
-const getListings = (start, end) => new Promise((resolve, reject) => resolve(listingFaker(start, end)));
+const getListings = (start, end, cities) => new Promise((resolve, reject) => resolve(listingFaker(start, end, cities)));
 module.exports = getListings;

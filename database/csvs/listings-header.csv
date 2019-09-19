@@ -1,1 +1,0 @@
-listingId:ID(Listing-ID), listingName, photoId, cityId, cost:int, stars:int, reviews:int,  type, :LABEL

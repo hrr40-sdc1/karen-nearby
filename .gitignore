@@ -9,7 +9,9 @@ public/nearby.bundle.js
 scripts/images/
 database/data.json
 .vscode/
-scripts/uploads3.sh
+
+## CSVS
+database/csvs/*.csv
 
 
 

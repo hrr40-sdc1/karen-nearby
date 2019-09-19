@@ -3,9 +3,9 @@ const fs = require('fs');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { Parser } = require('json2csv');
 
-const getCities = require('./cityfaker.js');
-const getPhotos = require('./imagefaker.js');
-const getListings = require('./listingfaker.js');
+const getCities = require('./fakers/cityfaker.js');
+const getPhotos = require('./fakers/imagefaker.js');
+const getListings = require('./fakers/listingfaker.js');
 
 const header = { header: false };
 

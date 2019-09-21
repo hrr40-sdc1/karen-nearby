@@ -142,3 +142,8 @@ RETURN listing.listingName
 MATCH (n) WHERE EXISTS(n.cityId) RETURN DISTINCT "node" as entity, n.cityId AS cityId LIMIT 25 UNION ALL MATCH ()-[r]-() WHERE EXISTS(r.cityId) RETURN DISTINCT "relationship" AS entity, r.cityId AS cityId LIMIT 25
 
 Started streaming 25 records in less than 1 ms and completed after 9 ms.
+
+CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City)
+WHERE l.cityId = c.cityId
+RETURN l",
+"CREATE (l)-[:NEARBY]->(c)", {batchSize:10000, parallel:false})

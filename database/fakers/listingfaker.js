@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 const faker = require('faker');
 
-const listingFaker = (start, end, count) => {
+const listingFaker = (start, end) => {
   const listings = [];
   for (let listingId = start; listingId < end; listingId += 1) {
     const cityId = faker.random.number({
       min: 0,
-      max: parseInt(count, 10),
+      max: 65000,
     });
     const type = faker.random.arrayElement(['Entire place', 'Private Room', 'Shared Room']);
     const listingName = faker.lorem.words(2);
@@ -22,14 +22,29 @@ const listingFaker = (start, end, count) => {
       min: 3,
       max: 5,
     });
-    const photoId = faker.random.number({
+    const photo1 = faker.random.number({
+      min: 0,
+      max: 1000,
+    });
+    const photo2 = faker.random.number({
+      min: 0,
+      max: 1000,
+    });
+    const photo3 = faker.random.number({
+      min: 0,
+      max: 1000,
+    });
+    const photo4 = faker.random.number({
       min: 0,
       max: 1000,
     });
     listings.push({
       listingId,
       listingName,
-      photoId,
+      photo1: `${photo1}.jpg`,
+      photo2: `${photo2}.jpg`,
+      photo3: `${photo3}.jpg`,
+      photo4: `${photo4}.jpg`,
       cityId,
       cost,
       stars,
@@ -41,5 +56,5 @@ const listingFaker = (start, end, count) => {
   return listings;
 };
 
-const getListings = (start, end, cities) => new Promise((resolve, reject) => resolve(listingFaker(start, end, cities)));
+const getListings = (start, end) => new Promise((resolve, reject) => resolve(listingFaker(start, end)));
 module.exports = getListings;

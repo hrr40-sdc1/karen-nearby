@@ -1,26 +1,34 @@
 DROP SCHEMA "blurg" CASCADE;
+
 CREATE SCHEMA "blurg";
-CREATE TABLE "blurg".LISTINGS(
-  listingId INT primary key,
-  listingName CHARACTER (30),
-  photoId INT,
-  cityId INT,
+
+CREATE TABLE "blurg".LISTINGS ( listingId INT PRIMARY KEY, listingName CHARACTER (30), photoId INT, cityId INT,
+  COST INT, stars INT, reviews INT, TYPE CHARACTER (30)
+);
+
+testdb = # CREATE SCHEMA IF NOT EXISTS myschema;
+
+testdb = #
+CREATE TABLE myschema.listing (
+  listingId INT NOT NULL,
+  listingName VARCHAR(30) NOT NULL,
+  cityId INT NOT NULL,
+  photoId VARCHAR(30),
   cost INT,
   stars INT,
   reviews INT,
-  type CHARACTER (30)
+  type VARCHAR(30),
+  PRIMARY KEY (listingId)
 );
 
-testdb=#
-create schema myschema;
+testdb = #
+SELECT
+  *
+FROM
+  myschema.listing;
 
-testdb=#
-create table myschema.company(
-  ID   INT              NOT NULL,
-  NAME VARCHAR (20)     NOT NULL,
-  AGE  INT              NOT NULL,
-  ADDRESS  CHAR (25),
-  SALARY   DECIMAL (18, 2),
-  PRIMARY KEY (ID)
-);
-testdb=# select * from myschema.company;
+  photoId char(10) NOT NULL,
+  url TEXT NOT NULL,
+  PRIMARY KEY (photoId));
+
+;

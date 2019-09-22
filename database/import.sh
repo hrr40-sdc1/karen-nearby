@@ -6,4 +6,3 @@ ECHO $LOCATION
 rm -rf "$LOCATION"/data/databases/graph.db
 "$LOCATION"/bin/neo4j-admin import --database=graph.db  --nodes="csvs/headers/cities-header.csv,csvs/cities-data.*" --nodes="csvs/headers/listings-header.csv,csvs/listings-data.*"
 # "$LOCATION"/bin/neo4j restart
-

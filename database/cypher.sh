@@ -49,8 +49,7 @@ Started streaming 1 records after 1 ms and completed after 10 ms.
 MATCH (photo:Photo) RETURN photo.url
 Started streaming 1002 records after 1 ms and completed after 10 ms.
 
-MATCH (:City { cityId: '17' })-->(listing)
-RETURN listing.listingName
+MATCH (:City { cityId: '17' })-->(listing) RETURN listing.listingName
 Started streaming 99389 records after 2 ms and completed after 36787 ms.
 "officiis dolor"
 "ullam exercitationem"
@@ -85,10 +84,7 @@ MATCH (c:City)
 WHERE l.cityId = c.cityId
 CREATE (c)-[:NEARBY]->(l);
 
-CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City)
-WHERE l.cityId = c.cityId
-RETURN l, c",
-"CREATE (c)-[:NEARBY]->(l)", {batchSize:10000, parallel:false})
+CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City) WHERE l.cityId = c.cityId RETURN l, c", "CREATE (c)-[:NEARBY]->(l)", {batchSize:10000, parallel:false});
 
 CREATE INDEX ON :City(cityId)
 CREATE INDEX ON :Listing(listingId)
@@ -142,3 +138,8 @@ RETURN listing.listingName
 MATCH (n) WHERE EXISTS(n.cityId) RETURN DISTINCT "node" as entity, n.cityId AS cityId LIMIT 25 UNION ALL MATCH ()-[r]-() WHERE EXISTS(r.cityId) RETURN DISTINCT "relationship" AS entity, r.cityId AS cityId LIMIT 25
 
 Started streaming 25 records in less than 1 ms and completed after 9 ms.
+
+CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City)
+WHERE l.cityId = c.cityId
+RETURN l",
+"CREATE (l)-[:NEARBY]->(c)", {batchSize:10000, parallel:false})

@@ -40,12 +40,12 @@ const listingFaker = (start, end) => {
     });
     listings.push({
       listingId,
+      cityId,
       listingName,
       photo1: `${photo1}.jpg`,
       photo2: `${photo2}.jpg`,
       photo3: `${photo3}.jpg`,
       photo4: `${photo4}.jpg`,
-      cityId,
       cost,
       stars,
       reviews,

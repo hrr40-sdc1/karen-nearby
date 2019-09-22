@@ -1,1 +1,1 @@
-listingId:ID(Listing-ID), listingName, photo1, photo2, photo3, photo4, cityId:int, cost:int, stars:int, reviews:int,  type, :LABEL
+listingId:ID(Listing-ID), cityId:int, listingName,  photo1, photo2, photo3, photo4, cost:int, stars:int, reviews:int,  type, :LABEL

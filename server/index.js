@@ -1,6 +1,11 @@
+/* eslint-disable new-cap */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
+const neo4j = require('neo4j-driver').v1;
+
 const NearbyHouse = require('../database/NearbyHouse.js');
 
 const app = express();
@@ -18,14 +23,44 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/house/:parentHouseId', (req, res) => {
-  const { parentHouseId } = req.params;
-  NearbyHouse.find({ parentHouseId })
-    .then((houses) => {
-      res.send(houses);
+app.get('/house/:houseId', (req, res) => {
+  const { houseId } = req.params;
+  const driver = neo4j.driver(
+    'bolt://localhost',
+    neo4j.auth.basic('neo4j', 'password'),
+  );
+  const session = driver.session(neo4j.session.READ);
+  const getListingById = `MATCH (house:Listing {listingId: "${houseId}"}) RETURN house`;
+  session.run(getListingById)
+    .then((result) => {
+      const { records } = result;
+      const house = records[0].get('house');
+      return house;
     })
-    .catch((error) => {
-      res.send(error);
+    .then((id) => {
+      const getListingsByCityId = `MATCH (:City { cityId: "${id.properties.cityId}" })-->(listing) RETURN listing LIMIT 8`;
+      return session.run(getListingsByCityId)
+        .then((result) => {
+          const { records } = result;
+          const houses = records.map((record) => record.get('listing').properties);
+          res.status(200).json(houses);
+        })
+        .catch((e) => {
+          // Output the error
+          console.log(e);
+        });
+    })
+    .catch((e) => {
+    // Output the error
+      console.log(e);
+    })
+    .then(() => {
+      // Close the Session
+      session.close();
+    })
+    .then(() => {
+      // Close the Driver
+      driver.close();
     });
 });
 app.get('/house/:parentHouseId/:nearbyNum', (req, res) => {
@@ -69,14 +104,33 @@ app.put('/house/:parentHouseId/:nearbyNum', (req, res) => {
 
 app.post('/house/', (req, res) => {
   const { body } = req;
-  console.log('post body', req.body);
-  const newNearbyHouse = new NearbyHouse(body);
-  newNearbyHouse.save(body)
-    .then((data) => {
-      res.send(data);
+  const driver = neo4j.driver(
+    'bolt://localhost',
+    neo4j.auth.basic('neo4j', 'password'),
+  );
+  const session = driver.session();
+  const {
+    photo1, photo2, photo3, photo4, listingName, stars, reviews, type, cost,
+  } = body;
+  const createListing = 'CREATE (l:Listing { photo1: $photo1, photo2: $photo2, photos3: $photo3, photo4: $photo4, listingName: $listingName, stars: $stars, reviews: $reviews, type: $type, cost: $cost})';
+  session.run(createListing, {
+    photo1: photo1, photo2: photo2, photo3: photo3, photo4: photo4, listingName: listingName, stars: stars, reviews: reviews, type: type, cost: cost
+})
+    .then((result) => {
+      console.log('result', result);
+      res.status(200).json(result);
     })
-    .catch((error) => {
-      res.send(error);
+    .catch((e) => {
+    // Output the error
+      console.log(e);
+    })
+    .then(() => {
+      // Close the Session
+      session.close();
+    })
+    .then(() => {
+      // Close the Driver
+      driver.close();
     });
 });
 

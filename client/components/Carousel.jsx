@@ -93,7 +93,7 @@ class Carousel extends React.Component {
               heartHouseClicked={this.heartHouseClicked.bind(this)}
               heartArr={this.state.heartArr}
               house={house}
-              key={house.arrIndex}
+              key={house.listingId}
             />
           ))
             : null}

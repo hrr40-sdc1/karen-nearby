@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import styled from 'styled-components';
 
 import React from 'react';
@@ -39,32 +40,32 @@ class House extends React.Component {
     return (
       <HouseContainer className='house'>
         <ImageContainer>
-          <Heart heartArr={this.props.heartArr} arrIndex={this.props.house.arrIndex} heartHouseClicked={this.props.heartHouseClicked}/>
+          <Heart heartArr={this.props.heartArr} arrIndex={this.props.house.listingId} heartHouseClicked={this.props.heartHouseClicked}/>
           <ImageHouse
             className='image'
             onClick={this.handleClick.bind(this)}
-            src={this.props.house.imgUrl}>
+            src={`https://hrr40-sdc1.s3-us-west-2.amazonaws.com/images/${this.props.house.photo1}`}>
           </ImageHouse>
         </ImageContainer>
         <Words onClick={this.handleClick.bind(this)}>
           <LightDescription className='layout'>
             <h5>
-              {this.props.house.type.toUpperCase()}: {this.props.house.location.toUpperCase()}
+              {this.props.house.type.toUpperCase()}: {this.props.house.cityId}
             </h5>
           </LightDescription>
           <div className='description'>
             <h3>{this.props.house.title} </h3>
           </div>
           <LightDescription className='cost'>
-            <h5>{this.props.house.cost} </h5>
+            <h5>{this.props.house.cost.low} </h5>
           </LightDescription>
           <div className='stars'>
             <h5>
               <Stars
-                key={this.props.house.id}
-                rating={this.props.house.stars}
+                key={this.props.house.listingId}
+                rating={this.props.house.stars.low}
               />
-              {this.props.house.reviewCount}
+              {this.props.house.reviews.low}
             </h5>
           </div>
         </Words>

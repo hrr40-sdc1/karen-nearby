@@ -24,7 +24,9 @@ class Widget extends React.Component {
   }
 
   componentDidMount() {
-    this.getNearbyHouses(1);
+    const urlParams = new URLSearchParams(window.location.search);
+    const houseId = urlParams.get('houseId') || 1;
+    this.getNearbyHouses(houseId);
   }
 
   updateHouseList(houses) {

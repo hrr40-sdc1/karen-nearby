@@ -14,16 +14,17 @@ CREATE INDEX ON :City(cityId);
 CREATE INDEX ON :Photo(photoId);
 CREATE INDEX ON :Listing(listingId);
 
+dbms.memory.heap.initial_size=3600m
+dbms.memory.heap.max_size=3600m
+dbms.memory.pagecache.size=2g
+
 MATCH (l:Listing)
 WITH l
 MATCH (c:City)
 WHERE l.cityId = c.cityId
 CREATE (c)-[:NEARBY]->(l);
 
-CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City)
-WHERE l.cityId = c.cityId
-RETURN l, c",
-"CREATE (c)-[:NEARBY]->(l)", {batchSize:10000, parallel:false})
+CALL apoc.periodic.iterate("MATCH (l:Listing), (c:City) WHERE l.cityId = c.cityId RETURN l, c", "CREATE (c)-[:NEARBY]->(l)", {batchSize:10000, parallel:false})
 
 CREATE INDEX ON :City(cityId)
 CREATE INDEX ON :Listing(listingId)
@@ -31,8 +32,7 @@ CREATE INDEX ON :Photo(photoId)
 MATCH (n) RETURN n limit 25
 
 
-MATCH (house:Listing {listingId: '9000000'})
-RETURN house
+MATCH (house:Listing {listingId: '9000000'}) RETURN house
 
 {
   "cost": "355",
@@ -110,8 +110,7 @@ Started streaming 1 records after 1 ms and completed after 10 ms.
 MATCH (photo:Photo) RETURN photo.url
 Started streaming 1002 records after 1 ms and completed after 10 ms.
 
-MATCH (:City { cityId: '17' })-->(listing)
-RETURN listing.listingName
+MATCH (:City { cityId: '17' })-->(listing) RETURN listing.listingName
 Started streaming 99389 records after 2 ms and completed after 36787 ms.
 "officiis dolor"
 "ullam exercitationem"

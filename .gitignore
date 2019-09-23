@@ -12,6 +12,7 @@ database/data.json
 
 ## CSVS
 database/csvs/*.csv
+database/csvs/archives/
 
 
 
@@ -48,3 +49,5 @@ dist/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
+# deployment
+.env

@@ -34,7 +34,7 @@
     "chai-http": "^4.3.0",
     "dotenv": "^8.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^4.1.0",
     "jquery": "^3.4.1",
     "json2csv": "^4.5.3",
